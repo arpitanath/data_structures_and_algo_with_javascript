@@ -8,3 +8,5 @@ var isPowerOfThree = function(n) {
     return true
   }
 };
+
+console.log(isPowerOfThree(15));
