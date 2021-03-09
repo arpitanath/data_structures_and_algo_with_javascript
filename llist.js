@@ -62,14 +62,29 @@ class list{
         }
         console.log(temp.data);
     }
+    
+    delete(node){
+       let temp = this.head;
+       while(temp.data!==node.data){
+            temp=temp.next;     
+       }
+       temp.data=temp.next.data;
+       temp.next.val=node.data;
+       temp.next=temp.next.next;
+    }
 }
 
 let n = new Node(2);
 let n2 = new Node(3);
 let n3 = new Node(4);
+let n4 = new Node(5);
+let n5 = new Node(6);
 let l = new list();
 
 l.add(n);
 l.add(n2);
 l.add(n3);
+l.add(n4);
+l.add(n5);
+l.delete(n);
 l.print();
