@@ -14,3 +14,5 @@
     
     return false;
 };
+
+//fastpointer = head
