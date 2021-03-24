@@ -1,36 +1,40 @@
-// function Node(data){
-//     this.data=data;
-//     this.next=null;
-// }
+//Function based
 
-// function List(){
-//     this._head=null;
+function Node(data){
+    this.data=data;
+    this.next=null;
+}
 
-//     this.add=function(node){
-//         if(this._head==null)   this._head=node;
-//         else{
-//             let temp=this._head;
-//             while(temp.next!=null)   temp=temp.next;
-//             temp.next=node;
-//         }
-//     }
+function List(){
+    this._head=null;
 
-//     this.print=function(){
-//         let temp=this._head;
-//         while(temp!=null){
-//             console.log(temp.data);
-//             temp=temp.next;
-//         }
-//     }
-// }
+    this.add=function(node){
+        if(this._head==null)   this._head=node;
+        else{
+            let temp=this._head;
+            while(temp.next!=null)   temp=temp.next;
+            temp.next=node;
+        }
+    }
+
+    this.print=function(){
+        let temp=this._head;
+        while(temp!=null){
+            console.log(temp.data);
+            temp=temp.next;
+        }
+    }
+}
     
-// let l=new List();
-// l.add(new Node(4));
-// l.add(new Node(5));
-// l.add(new Node(7));
+let l=new List();
+l.add(new Node(4));
+l.add(new Node(5));
+l.add(new Node(7));
 
-// l.print();
+l.print();
 
+
+//Class based
 class Node{
     constructor(data){
         this.data=data;

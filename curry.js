@@ -33,18 +33,19 @@ function sumArg(...args) {
 
 //console.log(curry(sumArg)(1)(2)());
 
-function curry2(fn){
+// Currying is when you break down a function that takes multiple arguments into a series of 
+// functions that each take only one argument. Here's an example in JavaScript:
 
-    let ini=0;
-    return function collector(...args){
+console.log(curry2(sumArg)(1)(2, 3)());
 
-        if(ini===arguments.length){
-         return fn.apply(null,arguments);
-        }
-        ini=args.length;
-        return collector.bind(null,...args);
+function curry2(fn) {
+  let ini = 0;
+  return function collector(...args) {
+    if (ini === args.length) {
+      /// here arguments.length = total number of arguments passed
+      return fn.apply(null, args);
     }
-
+    ini = args.length;
+    return collector.bind(null, ...args); // here we passing previous arguments to collector function
+  };
 }
-
-console.log(curry2(sumArg)(1)(2,3)());
