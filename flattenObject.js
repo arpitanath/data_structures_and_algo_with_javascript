@@ -2,17 +2,17 @@
 // If a certain key is empty, it should be excluded from the output.
 // When you concatenate keys, make sure to add the dot character between them. For instance when flattening KeyB, c and d the result key would be KeyB.c and KeyB.d.
 // Example:
-// const oldObject = {
-//     "KeyA": 1,
-//     "KeyB":{
-//         "c": 2,
-//         "d": 3,
-//         "e":{
-//             "f": 7,
-//             "" : 2
-//          }
-//       }
-// }
+const oldObject = {
+  KeyA: 1,
+  KeyB: {
+    c: 2,
+    d: 3,
+    e: {
+      f: 7,
+      "": 2
+    }
+  }
+};
 // Output:
 // {
 //     "KeyA": 1,
@@ -22,40 +22,35 @@
 //     "KeyB.e": 2
 // }
 
-function flattenObject(oldObject) {
-  let newObject = {};
+function flattenObject(oldObj) {
+  let newObj = {};
 
-  flattenHelper(oldObject,'');
+  flattenHelper(oldObj, "");
 
-  function flattenHelper(currentObject, previousKeyName) {
-    for (let key in currentObject) {
-      let value = currentObject[key];
-
+  function flattenHelper(currentObj, prevKey) {
+    for (let key in currentObj) {
+      let value = currentObj[key];
       if (value.constructor !== Object) {
-        //first entry
-        if ((previousKeyName = "" || previousKeyName == null)) {
-          newObject[key] = value;
-          console.log(1,newObject,key);
+        if (prevKey == null || prevKey == "") {
+          newObj[key] = value; //"KeyA": 1
         } else {
-            if(key == null || key == '') {
-                newObject[previousKeyName] = value;
-                console.log(2,newObject,previousKeyName);
-           }else{
-               newObject[previousKeyName + '.' + key] = value;
-               console.log(3,newObject,key,previousKeyName);
-           }
+          if (key == null || key == "") {
+            newObj[prevKey] = value; //"KeyB.e": 2
+          } else {
+            newObj[prevKey + "." + key] = value;  //"KeyB.e.f": 7,
+          }
         }
       } else {
-        if (previousKeyName == null || previousKeyName == "") {
-        console.log(4,key);
-          flattenHelper(value,key);
+        if (prevKey == null || prevKey == "") {
+          flattenHelper(value, key); //if keyB was first
         } else {
-            console.log(5,previousKeyName + "." + key);
-          flattenHelper(value, previousKeyName + "." + key);
+          flattenHelper(value, prevKey + "." + key); //keyB
         }
       }
     }
   }
 
-  return newObject;
+  return newObj;
 }
+
+console.log(flattenObject(oldObject));

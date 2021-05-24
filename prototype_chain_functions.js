@@ -19,7 +19,7 @@ let p = new Person("alex","beta",23,"male","fucking around");
 
 function Teacher(first,last,age,gender,interests,subject){
 
-    //allows to call a functiondefined somewhere else but with current context
+    //allows to call a function defined somewhere else but with current context
     Person.call(this,first,last,age,gender,interests);
 
     this.subject=subject;

@@ -1,5 +1,5 @@
 function a(){
-    console.log(b) // output: ƒ b(){ console.log("hi") }
+    console.log(b) // output: ƒ b(){ console.log("hi") } function declaration has higher precedence over var declaration
     var b = 10;
     return
     function b(){ console.log("hi") }
@@ -7,7 +7,7 @@ function a(){
   a()
 
   var a = 10;
-  function b() {
+  function b(){
     a = 1;
     return;
     function a(){};
