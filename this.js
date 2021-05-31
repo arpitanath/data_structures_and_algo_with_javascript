@@ -14,8 +14,8 @@ const x = {
   }
   var name = 'Jon doe';
   x.setName(name);
-  console.log(x.firstName); 
-  console.log(x.lastName); 
+  console.log(x.firstName); //""
+  console.log(x.lastName); //""
 
 
   var Foo = function( a ) {
@@ -64,10 +64,10 @@ function a(){
   a() 
 
   const a =()=>{
-      this.name="tatti";
+      this.name="test";
       console.log(this);
   }
-  a(); //{ name: 'tatti' }
+  a(); //{ name: 'test' } on window
 
 const a ={
     fn:()=>{
@@ -112,3 +112,51 @@ obj = {
     }
   }
   obj.getN()
+
+
+  var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo);
+        console.log("outer func:  self.foo = " + self.foo);
+        (function() {
+            console.log("inner func:  this.foo = " + this.foo);
+            console.log("inner func:  self.foo = " + self.foo);
+        }());
+    }
+};
+myObject.func();
+//outer func:  this.foo = bar
+//outer func:  self.foo = bar
+//inner func:  this.foo = undefined
+// inner func:  self.foo = bar
+
+
+const a1 = {
+  b: () => {
+    console.log(this);
+  },
+  c: function () {
+    console.log(this);
+  },
+  d: function () {
+    return function () {
+      console.log(this);
+    };
+  },
+  e: function () {
+    return () => {
+      console.log(this);
+    };
+  }
+};
+
+a1.b();
+a1.c(); 
+a1.d()(); 
+a1.e()(); 
+// VM130:3 Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+// VM130:6 {b: ƒ, c: ƒ, d: ƒ, e: ƒ}
+// VM130:10 Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+// VM130:15 {b: ƒ, c: ƒ, d: ƒ, e: ƒ}

@@ -1,6 +1,7 @@
 // Why do we need to convert callbacks to promises?
 //***********************************************************
-//*** With callbacks, if you want to do something sequentially you will have to specify an err argument in each callback, which is redundant. In promises or async-await, you can just add a .catch method or block which will catch any errors that occurred in the promise chain
+//*** With callbacks, if you want to do something sequentially you will have to specify an err argument in each callback, which is redundant.
+//*** In promises or async-await, you can just add a .catch method or block which will catch any errors that occurred in the promise chain
 //*** With callbacks, you have no control over when it's called, under what context, or how many times it's being called, which can lead to memory leaks.
 //*** Using promises, we control these factors (especially error handling) so the code is more readable and maintainable.
 

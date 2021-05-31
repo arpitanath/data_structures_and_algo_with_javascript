@@ -1,4 +1,4 @@
-var deleteDuplicates = function(head) {
+var deleteDuplicatesFromSortedList = function(head) {
     
     let current=head;
     

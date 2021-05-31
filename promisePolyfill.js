@@ -7,7 +7,7 @@ function PromisePolyFill(executor) {
     called = false,
     value;
 
-  //2 step
+//2 step
 //resolve triggers the callback passed to then
   function resolve(v) {
     fulfilled = true;
@@ -101,5 +101,41 @@ PromisePolyFill.all = promises => {
   return new PromisePolyFill(executor);
 };
 
+if (!Promise.allSettled) {
+  const rejectHandler = reason => ({ status: 'rejected', reason });
+
+  const resolveHandler = value => ({ status: 'fulfilled', value });
+
+  Promise.allSettled = function (promises) {
+    const convertedPromises = promises.map(p => Promise.resolve(p).then(resolveHandler, rejectHandler));
+    return Promise.all(convertedPromises);
+  };
+}
+
+/*
+
+Promise.all
+Promise.all takes an array of promises (it technically can be any iterable, 
+but is usually an array) and returns a new promise.
+
+The new promise resolves when all listed promises are settled, 
+and the array of their results becomes its result.
 
 
+
+Promise.allSettled just waits for all promises to settle, regardless of the result. The resulting array has:
+{status:"fulfilled", value:result} for successful responses,
+{status:"rejected", reason:error} for errors.
+
+
+Promise.race
+Similar to Promise.all, but waits only for the first settled promise and gets its result (or error).
+
+Promise.any
+Similar to Promise.race, but waits only for the first fulfilled promise and gets its result. 
+If all of the given promises are rejected, then the returned promise is rejected with AggregateError – a special error object that stores all promise errors in its errors property.
+
+
+Promise.resolve
+Promise.resolve(value) creates a resolved promise with the result value.
+*/

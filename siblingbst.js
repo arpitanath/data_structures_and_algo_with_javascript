@@ -1,3 +1,5 @@
+//https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+
 var connect = function(root) {
     if (!root || !root.left) {
       return root;

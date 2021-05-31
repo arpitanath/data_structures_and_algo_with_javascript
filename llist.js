@@ -42,13 +42,10 @@ class Node{
     }
 }
 class list{
-
     constructor(){
         this.head=null;
     }
-
     add(node){
-
             if(this.head===null) this.head=node;
             else{
                 let temp=this.head;
@@ -56,7 +53,6 @@ class list{
                 temp.next=node;
             }
     }
-
     print(){
         let temp=this.head;
 
@@ -66,14 +62,13 @@ class list{
         }
         console.log(temp.data);
     }
-    
     delete(node){
        let temp = this.head;
        while(temp.data!==node.data){
             temp=temp.next;     
        }
        temp.data=temp.next.data;
-       temp.next.val=node.data;
+       temp.next.data=node.data;
        temp.next=temp.next.next;
     }
 }

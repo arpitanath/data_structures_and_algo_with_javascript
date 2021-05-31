@@ -13,7 +13,7 @@ function a(){
     function a(){};
   }
   b();
-  console.log(a) // output: 10
+  console.log(a) // output: 10 here function is getting hoisted
 
   function sayHi() {
       console.log(name); // output: undefined
@@ -45,7 +45,7 @@ function a(){
     var x = function(){ console.log("hi") }
   }
   y()
-  console.log(x) // output: 10
+  console.log(x) // output: 10 - new initialisatiion has happened
 
 
   var x = 10
@@ -60,15 +60,39 @@ console.log(x) // output: 100
 
   console.log(a())
   function a(){
-    console.log("gg")
+    console.log("gg")  // gg
   }
   
-  console.log(b())
+  console.log(b()) //  b is not a function
   var b = function(){
     console.log("gg")
   }
   
-  console.log(c(), d())
+  console.log(c(), d()) // is not a function
   var c = function d(){
     console.log("gg")
   }
+
+var a=10;
+b(40);
+
+function b(x) {
+  a(20);
+  a=40;
+  function a() { console.log(x);} 
+}
+
+console.log(a); //40
+
+
+var a = 10;
+b(40);
+
+function b(x) {
+  a(20);
+  a=40;
+  a(20);
+  function a() { console.log(x);} 
+}
+
+console.log(a); //40 a is not a function
