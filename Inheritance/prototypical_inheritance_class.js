@@ -15,6 +15,6 @@ class Person{
     }
 }
 
-let p= new Person("arpita","nath",23,"female","funck aroung");
+let p= new Person("arpita","nath",23,"female","Painting");
 
 p.greeting();
