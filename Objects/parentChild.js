@@ -1,12 +1,3 @@
-var PARENT_CHILD = {
-    'Newton': ['Plato', 'Aristotle'],
-    'Aristotle': ['Einstein'],
-    'Plato': ['Tesla', 'Edison'],
-    'Einstein': ['Hawking']
-};
-
-
-
 
 /* Excpected Output 
  
@@ -48,23 +39,23 @@ var PARENT_CHILD = {
 
 
 function getParentTree(graph) {
-    let parents = {};
-    for (let par of Object.keys(graph)) {
-        for (let child of graph[par]) {
-            parents[child] = { "parent": par };
+    let result = {};
+    for (parent of Object.keys(graph)) {
+        for (child of graph[parent]) {
+            result[child] = { "parent": parent };
         }
     }
-    for (let par of Object.keys(graph)) {
-        if (!parents.hasOwnProperty(par))
-            parents[par] = {};
-    }
-    for (let key of Object.keys(parents)) {
-        if (graph.hasOwnProperty(key)) {
-            parents[key]["child"] = graph[key].join(",");
-        }
-    }
+    for (parent of Object.keys(graph)) {
 
-    return parents;
+        if (result.hasOwnProperty(parent))
+            result[parent]["children"] = graph[parent].join(",");
+        else {
+            result[parent] = {};
+            result[parent]["children"] = graph[parent].join(",");
+        }
+
+    }
+    return result;
 }
 
 console.log(getParentTree(PARENT_CHILD));
