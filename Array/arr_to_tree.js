@@ -23,22 +23,15 @@ let list = [
 //     ]}
 // ]
 
-function arrayToTree(list) {
-  let map = {};
-  let ele = [];
-  for (let i = 0; i < list.length; i++) {
-    map[list[i].id] = i;
-    list[i].children = [];
-  }
-  for (let i = 0; i < list.length; i++) {
-    let node = list[i];
-    if (node.parent !== 0) {
-      list[map[node.parent]].children.push(node);
-    } else {
-      ele.push(node);
-    }
-  }
-  console.log(ele);
+
+function arrayToTree(list){
+  let result=[];
+      for(let i=0;i<list.length;i++){
+        list[i]["children"]=[];
+        list[i]["children"].push(list.filter(item=>item.parent==list[i].id));
+      }
+      result.push(list.filter(item=>item.parent==0));
+      return result;
 }
 
-arrayToTree(list);
+console.log(arrayToTree(list));
