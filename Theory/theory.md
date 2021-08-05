@@ -129,3 +129,19 @@ Time to Interactive	0–3.8
 Total Blocking Time	30%
 Cumulative Layout Shift	<0.1
 
+# React Lifecycle
+Component Did Mount -> no dependencies
+
+Component Did Update -> dependencies
+
+Component Will Unmount -> return fn
+
+# Why functional Component
+Hooks allow you to reuse stateful logic without changing your component hierarchy
+Complex components become hard to understand.
+You have to understand how this works in JavaScript, which is very different from how it works in most languages. You have to remember to bind the event handlers. 
+Verbose Code
+
+# Thunk
+The thunk middleware allows us to write functions that get dispatch and getState as arguments. The thunk functions can have any async logic we want inside, and that logic can dispatch actions and read the store state as needed.
+
