@@ -1,3 +1,8 @@
+// Hoisting is a JavaScript mechanism where variables and function declarations 
+// are moved to the top of their scope before code execution.
+
+// 1. Variable assignment takes precedence over function declaration
+// 2. Function declarations take precedence over variable declarations
 function a(){
     console.log(b) // output: ƒ b(){ console.log("hi") } function declaration has higher precedence over var declaration
     var b = 10;
@@ -13,7 +18,7 @@ function a(){
     function a(){};
   }
   b();
-  console.log(a) // output: 10 here function is getting hoisted
+  console.log(a) // output: 10 here function is getting hoisted and assigned 1
 
   function sayHi() {
       console.log(name); // output: undefined
