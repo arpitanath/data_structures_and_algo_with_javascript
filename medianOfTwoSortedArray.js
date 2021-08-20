@@ -67,3 +67,51 @@ var findMedianSortedArrays = function(nums1, nums2) {
     }
   
 };
+
+
+
+
+
+
+const findMedianSortedArrays = (A, B) => {
+	const length = A.length + B.length;
+
+	if (!length) return null;
+	if (length === 1) return !A.length ? B[0] : A[0];
+
+	let i = 0;
+	let j = 0;
+
+	while (i + j < Math.ceil((length + 1) / 2)) {
+		if (A[i] < B[j] || B[j] === undefined) i++;
+		else j++;
+	}
+
+	// subtract by 1, because loop increases it by 1 more
+	(i -= 1), (j -= 1);
+
+	if (length % 2 !== 0) {
+		// handle empty
+		if (A[i] === undefined) return B[j];
+		if (B[j] === undefined) return A[i];
+
+		if (A[i] > B[j]) return A[i];
+		else return B[j];
+	} else {
+		const num1 = isNaN(A[i]) ? Number.NEGATIVE_INFINITY : A[i];
+		const num2 = isNaN(A[i - 1]) ? Number.NEGATIVE_INFINITY : A[i - 1];
+		const num3 = isNaN(B[j]) ? Number.NEGATIVE_INFINITY : B[j];
+		const num4 = isNaN(B[j - 1]) ? Number.NEGATIVE_INFINITY : B[j - 1];
+
+		// handle empty
+		if (A[i] === undefined) return (B[j] + B[j - 1]) / 2;
+		if (B[j] === undefined) return (A[i] + A[i - 1]) / 2;
+
+		// find max and add with 2nd max
+		if (A[i] > B[j]) return (A[i] + Math.max(num2, num3, num4)) / 2;
+		if (B[j] > A[i]) return (B[j] + Math.max(num1, num2, num4)) / 2;
+
+		// handle 2 median same number
+		if (A[i] === B[j]) return A[i];
+	}
+};
